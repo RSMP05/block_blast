@@ -1,10 +1,9 @@
-import main
 def increment_grid_cell(grid, x, y):
     grid[y][x] += 1
     if grid[y][x] > 4:
         grid[y][x] = 0
 
-def add_block(grid, block_parts, color, x, y):
+def add_block(grid, block_parts, color):
     for part in block_parts:
         if part[0] < 0 or part[0] >= 8 or part[1] < 0 or part[1] >= 8:
             print("Out of bounds")

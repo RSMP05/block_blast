@@ -38,6 +38,7 @@ def check_horizontal_line(grid, y, last_checked_time, current_time):
       for x in range(len(grid[y])):
         grid[y][x] = 0
       last_checked_time = -1
+      make_3_random(blocks.arr)
   return last_checked_time
 
 def check_vertical_line(grid, x, last_checked_time, current_time):
@@ -48,7 +49,47 @@ def check_vertical_line(grid, x, last_checked_time, current_time):
       for y in range(len(grid)):
         grid[y][x] = 0
       last_checked_time = -1
+      make_3_random(blocks.arr)
   return last_checked_time
+
+def get_3_random(arr):
+	return (arr[random.randint(0, len(arr)-1)], arr[random.randint(0, len(arr)-1)], arr[random.randint(0, len(arr)-1)])
+
+def make_3_random(arr):
+	blocks_3 = get_3_random(arr)
+	global grid_f3
+	grid_f3 = [grid1, grid2, grid3] = [[[0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0]],
+																			[[0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0]],
+																			[[0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0],
+																			[ 0, 0, 0, 0, 0]]]
+	blocks.add_block(grid1, blocks_3[0], random.randint(1, 3))
+	blocks.add_block(grid2, blocks_3[1], random.randint(1, 3))
+	blocks.add_block(grid3, blocks_3[2], random.randint(1, 3))
+
+def display_3_random(grid_3):
+	for i in range(len(grid_3)):
+		for gy in range(len(grid_3[i])):
+			for gx in range(len(grid_3[i])):
+				if grid_3[i][gy][gx] == 1:
+					screen.blit(sprites.PREVIEW_RED_SPRITE, ((gx + 1 + i * 5) * settings.PREVIEW_CELL_SIZE + 1 * settings.CELL_SIZE, (11 * settings.CELL_SIZE + gy * settings.PREVIEW_CELL_SIZE)))
+				elif grid_3[i][gy][gx] == 2:
+					screen.blit(sprites.PREVIEW_GREEN_SPRITE, ((gx + 1 + i * 5) * settings.PREVIEW_CELL_SIZE + 1 * settings.CELL_SIZE, (11 * settings.CELL_SIZE + gy * settings.PREVIEW_CELL_SIZE)))
+				elif grid_3[i][gy][gx] == 3:
+					screen.blit(sprites.PREVIEW_BLUE_SPRITE, ((gx + 1 + i * 5) * settings.PREVIEW_CELL_SIZE + 1 * settings.CELL_SIZE, (11 * settings.CELL_SIZE + gy * settings.PREVIEW_CELL_SIZE)))
+				elif grid_3[i][gy][gx] == 4:
+					screen.blit(sprites.PREVIEW_YELLOW_SPRITE, ((gx + 1 + i * 5) * settings.PREVIEW_CELL_SIZE + 1 * settings.CELL_SIZE, (11 * settings.CELL_SIZE + gy * settings.PREVIEW_CELL_SIZE)))
+
 
 def main():
   running = True
@@ -58,6 +99,10 @@ def main():
   curx, cury = 0, 0
   last_checked_time_h = [-1] * len(grid)
   last_checked_time_v = [-1] * len(grid[0])
+
+  blocks.initialise(curx, cury)
+
+  make_3_random(blocks.arr)
 
   while running:
     current_time = pg.time.get_ticks()
@@ -77,11 +122,16 @@ def main():
         elif event.key == pg.K_l:
         	grid = [[0 for _ in range(8)] for _ in range(8)]
         elif event.key == pg.K_e:
-        	blocks.add_block(grid, blocks.arr[random.randint(0, len(blocks.arr)-1)],random.randint(1,4), curx, cury)
+        	blocks.add_block(grid, blocks.arr[random.randint(0, len(blocks.arr)-1)],random.randint(1,4))
+        elif event.key == pg.K_f:
+        	blocks.increment_grid_cell(grid, curx, cury)
+        print(f"X:{curx}; Y:{cury}")
 
     screen.fill(settings.BACKGROUND)
 
     draw_grid(grid)
+
+    display_3_random(grid_f3)
 
     for row in range(len(grid)):
       last_checked_time_h[row] = check_horizontal_line(grid, row, last_checked_time_h[row], current_time)

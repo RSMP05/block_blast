@@ -16,3 +16,15 @@ BLUE_SPRITE = pg.transform.scale(BLUE_SPRITE, (settings.CELL_SIZE, settings.CELL
 
 YELLOW_SPRITE = pg.image.load("sprites/yellow_sprite.png")
 YELLOW_SPRITE = pg.transform.scale(YELLOW_SPRITE, (settings.CELL_SIZE, settings.CELL_SIZE))
+
+PREVIEW_RED_SPRITE = pg.image.load("sprites/red_sprite.png")
+PREVIEW_RED_SPRITE = pg.transform.scale(RED_SPRITE, (settings.PREVIEW_CELL_SIZE, settings.PREVIEW_CELL_SIZE))
+
+PREVIEW_GREEN_SPRITE = pg.image.load("sprites/green_sprite.png")
+PREVIEW_GREEN_SPRITE = pg.transform.scale(GREEN_SPRITE, (settings.PREVIEW_CELL_SIZE, settings.PREVIEW_CELL_SIZE))
+
+PREVIEW_BLUE_SPRITE = pg.image.load("sprites/blue_sprite.png")
+PREVIEW_BLUE_SPRITE = pg.transform.scale(BLUE_SPRITE, (settings.PREVIEW_CELL_SIZE, settings.PREVIEW_CELL_SIZE))
+
+PREVIEW_YELLOW_SPRITE = pg.image.load("sprites/yellow_sprite.png")
+PREVIEW_YELLOW_SPRITE = pg.transform.scale(YELLOW_SPRITE, (settings.PREVIEW_CELL_SIZE, settings.PREVIEW_CELL_SIZE))
