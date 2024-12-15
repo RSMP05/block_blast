@@ -5,7 +5,6 @@
 Line clearing works
 
 TODO:
--pick 3 random blocks to display
 -add grabing
 -score
 -post-processing
